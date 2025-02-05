@@ -1,0 +1,2 @@
+    <h3>FICHIER séparé !! c'est exemple.inc.php !</h3>
+    <p><span>Lorem, ipsum dolor sit amet consectetur adipisicing elit. In, pariatur repudiandae accusantium nesciunt error tenetur commodi sapiente cumque modi omnis consequatur sunt sequi adipisci, amet porro quia earum nam deserunt.</span><span>Eveniet voluptas aliquid velit ea praesentium sint perspiciatis, ullam alias facilis, dicta dolore voluptatum enim at eius illo in voluptate est animi nam assumenda dignissimos, nostrum aspernatur? At, provident distinctio.</span></p>

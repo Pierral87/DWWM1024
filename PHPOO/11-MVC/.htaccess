@@ -1,0 +1,43 @@
+RewriteEngine On
+
+
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([0-9]+)$ index.php?ctrl=$1&op=$2&id=$3 [L]
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)$ index.php?ctrl=$1&op=$2 [L]
+RewriteRule ^([a-zA-Z0-9_-]+)$ index.php?ctrl=$1 [L]
+RewriteRule ^login$ login.php [L]
+
+ErrorDocument 404 /LOKI/PHPOO/10-MVC/404.php
+
+
+# index.php?ctrl=user&op=update&id=2
+
+# La réécriture d'URL, ou URL rewriting, est une technique courante utilisée pour rendre les URLs plus claires, lisibles et mieux référencées. En créant des URLs structurées et descriptives, les développeurs facilitent la navigation, améliorent l'expérience utilisateur et optimisent le référencement (SEO).
+
+# 1. Qu'est-ce que la réécriture d'URL ?
+
+# La réécriture d'URL consiste à transformer une URL complexe ou dynamique en une URL plus simple, lisible et descriptive, sans pour autant changer la page qu’elle pointe. Par exemple :
+
+# URL sans réécriture :
+# https://example.com/index.php?module=user&action=view&id=123
+
+# URL réécrite :
+# https://example.com/user/view/123
+
+# Ces URLs plus intuitives donnent une impression d’organisation et permettent à l'utilisateur de comprendre le contenu ou l'action simplement en regardant l'URL.
+
+# 2. Pourquoi utiliser la réécriture d'URL ?
+
+#     Lisibilité et Esthétique : Les URLs réécrites sont plus faciles à lire, donc plus attractives pour les utilisateurs.
+#     Référencement SEO : Les moteurs de recherche préfèrent les URLs claires et descriptives. Par exemple, une URL contenant des mots-clés pertinents peut améliorer le classement.
+#     Navigation simplifiée : Les utilisateurs peuvent facilement deviner la structure de l’URL et modifier les segments pour naviguer.
+#     Sécurité : Les paramètres dans les URLs peuvent parfois révéler des informations internes (comme des IDs de session). Réécrire les URLs peut aider à les masquer.
+
+# Sur les serveurs Apache, la réécriture d’URL se fait avec le module mod_rewrite, via un fichier .htaccess.
+
+# Il faut faire correspondre un pattern regex à une vraie url
+# RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([0-9]+)$ index.php?ctrl=$1&op=$2&id=$3 [L]
+# Ici on comprend un pattern alphaNUm/alphaNum/num étant compris comme index.php?ctrl=param1&op=param2&id=param3
+
+# le [L] signifie Last, pour dernière règle utilisée, une fois ce pattern rencontré on ne cherchera pas d'autres routes 
+# [QSA] (Query String Append)
+    # Signification : Query String Append (Ajouter la chaîne de requête) : Si l'URL d'origine contient des paramètres de requête (query string), [QSA] s'assure qu'ils sont ajoutés à l'URL de destination.
