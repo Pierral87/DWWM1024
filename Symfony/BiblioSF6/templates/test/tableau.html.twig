@@ -1,0 +1,84 @@
+{% extends "base.html.twig" %}
+
+{% block body  %}
+
+{# Piocher dans un tableau associatif #}
+
+<ul>
+{# Plusieurs possibilités de syntaxe #}
+    <li>Jour : {{tableau["jour"]}} </li>
+    <li>Mois : {{tableau.mois}} </li>
+    <li>Année : {{tableau.annee}} </li> 
+</ul>
+
+{# Piocher dans un tableau indexé numériquement #}
+
+<ul>
+    <li> {{tableau2[0]}} </li>
+    <li> {{tableau2.1}} </li>
+    <li> {{tableau2.2}} </li>
+</ul>
+
+{# Boucle FOR avec compteur numérique #}
+{% for i in 0..2 %}
+    {{tableau2[i]}}
+{% endfor %}
+
+<ul>
+{# Boucle for dans sa syntaxe équivalente au foreach #}
+{% for item in tableau %}
+    <li> {{item}}  </li>
+{% endfor %}
+
+
+{# Syntaxe foreach avec récupération des indices #}
+{% for indice, valeur in tableau %}
+    <li> {{indice}} : {{valeur}} </li>
+{% endfor %}
+</ul>
+
+{# IF #}
+{# {% if nombre < 2 %}
+<p>Le nombre est inférieur à 2</p>
+{% elseif nombre < 10 %}
+<p>Le nombre est compris entre 2 et 9</p>
+{% else %}
+<p>Le nombre est supérieur ou égal à 10</p>
+{% endif %} #}
+
+{# TESTS #}
+{# équivalent à isset #}
+{% if chaine is defined %}
+<h3> {{chaine}} </h3>
+{% endif %}
+
+{# is empty pour la vérification de si la variable a bien une valeur 
+PAR CONTRE
+contrairement au PHP natif, le test empty de twig ne vérifie pas l'existence de la variable, il vérifie uniquement le contenu d'une variable bel et bien existente
+Il faudra toujours faire un is defined en premier
+ #}
+
+ {% if nombre is defined and nombre is empty %}
+ <h4> le nombre est défini et vide</h4>
+ {% endif %}
+
+ {% if chaine is defined and chaine is empty %}
+ <h4> La chaine existe mais est vide </h4>
+ {% endif %}
+
+ {% if chaine is not defined %}{% endif %}
+
+ {% if chaine is not empty %}{% endif %}
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+{% endblock %}

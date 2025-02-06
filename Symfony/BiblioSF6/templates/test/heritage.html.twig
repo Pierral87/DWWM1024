@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+{# La ligne ci dessus permet de récupérer par héritage le modèle base.html.twig et d'en modifier certains composants,
+Dès qu'on redéfinira un block, alors le nouveau contenu écrasera le contenu du block hérité #}
+
+{% block titreH1 %} <h1>Page d'héritage</h1> {% endblock %}
+
+{% block body %}
+
+<h2>HELLO</h2>
+<p>Nous sommes là sur la page héritage pourtant le reste de la page reste celui de base.html.twig grâce à l'héritage</p>
+
+{% endblock %}
+
+{% block title %}Heritage{% endblock %}
+
+{# EXO changez le contenu de la balise h1 
+
+Pour la page heritage : "Page d'héritage"
+Mais, on veut toujours garder "Bienvenue à la bibliothèque" pour le reste des routes
+ #}
