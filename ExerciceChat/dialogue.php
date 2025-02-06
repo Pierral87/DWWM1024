@@ -178,15 +178,15 @@ $liste_commentaires = $pdo->query("SELECT pseudo, message, date_format(date_enre
                     // var_dump($commentaire);
                     echo '<div class="card w-75 mx-auto mb-3">
                                     <div class="card-header bg-dark text-white">
-                                        Par : ' . $commentaire['pseudo'] . ', le : ' . $commentaire['date_fr'] . '
+                                        Par : ' . htmlspecialchars($commentaire['pseudo']) . ', le : ' . $commentaire['date_fr'] . '
                                     </div>
                                     <div class="card-body">
-                                        <p class="card-text">' .$commentaire['message'] . '</p>
+                                        <p class="card-text">' .htmlspecialchars($commentaire['message']) . '</p>
                                     </div>
                                 </div>';
                 }
                 ?>
-
+               
             </div>
         </div>
     </div>
