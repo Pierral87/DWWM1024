@@ -78,3 +78,15 @@ phpinfo();
 // Ctrl + C 
 // Pour être sûr d'avoir fermé le serveur 
 // symfony server:stop
+
+// Pour créer la base de données (une fois qu'on l'a définie dans le .env)
+// symfony console doctrine:database:create
+
+// Pour créer une entité
+// symfony console make:entity
+
+// Pour créer une migration
+// symfony console make:migration
+
+// Pour valider une migration
+// symfony console doctrine:migrations:migrate

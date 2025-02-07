@@ -66,8 +66,46 @@ final class TestController extends AbstractController
     [
         "tableau" => $tab,
         "tableau2" => [40, "test", true],
-        "nombe" => 5, 
+        "nombre" => 5, 
         "chaine" => ""
     ]);
     }
+
+    // Route avec param attendu
+
+    // Si on veut rendre ce paramètre facultatif (le param prenom)
+    // On peut écrire {prenom?}
+    #[Route('/test/salutation/{prenom?}', name: "app_salutation")]
+    // Ou sinon je peux donner une valeur par défaut à prenom dans la méthode salutation par exemple $prenom = "inconnu" si le prenom n'est pas fourni dans la route 
+    public function salutation($prenom)
+    {
+
+        // Donner une valeur par défaut serait faisable ici aussi avec une condition 
+        // Ici syntaxe raccourcie pour "is defined", si oui, $prenom prends bien la valeur récupérée par l'URL, sinon il prendra la valeur "inconnu"
+        // $prenom = $prenom ?? "inconnu";
+
+        return $this->render("test/salutation.html.twig", ["prenom" => $prenom]);
+        // EXO : Créez la vue et affichez dans la balise h1, Bonjour prenom (qui sera le prenom saisi dans l'url)
+    }
+
+    // Attention l'ordre des routes est important ! Si deux routes se ressemblent, symfony va prendre la première qu'il trouve dans l'ordre d'écriture dans notre controller
+    // Par exemple, si je garde ci dessus ma route salutation avec le prenom facultatif, l'accès à l'url /test/salutation va utiliser la Route ci dessus
+    // Et n'utilisera pas la route ci dessous car elle n'aura pas la priorité
+    // #[Route('/test/salutation', name: "app_salutation")]
+
+
+    // EXERCICE : 
+    // Créez une nouvelle route qui va prendre 2 paramètres dans l'url et qui va afficher la valeur de l'addition, la multiplication, la soustraction et la division des deux nombres passés en paramètres 
+    // Il faudra gérer le fait de ne pas pouvoir faire une division par 0 
+    #[Route('/test/calcul/{chiffre1}/{chiffre2}', name: "app_calcul", requirements:["chiffre1" => "[0-9]+", "chiffre2" => "[0-9]+"])]
+    public function calcul($chiffre1, $chiffre2)
+    {
+        return $this->render("test/calcul.html.twig", 
+        [
+            "chiffre1" => $chiffre1,
+            "chiffre2" => $chiffre2
+        ]
+        );
+    }
+
 }

@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Calcul{% endblock %}
+
+{% block titreH1 %} <h1>Calcul !</h1> {% endblock %}
+
+{% block body %}
+
+<h2>Page test de calcul entre les chiffres {{chiffre1}} et {{chiffre2}} </h2>
+
+<h3>Addition : {{chiffre1}} + {{chiffre2}} = {{chiffre1 + chiffre2}} </h3>
+<h3>Soustraction : {{chiffre1}} - {{chiffre2}} = {{chiffre1 - chiffre2}} </h3>
+<h3>Multiplication : {{chiffre1}} * {{chiffre2}} = {{chiffre1 * chiffre2}} </h3>
+
+{% if chiffre2 != 0 %}
+<h3>Division : {{chiffre1}} / {{chiffre2}} = {{chiffre1 / chiffre2}} </h3>
+{% else %}
+<h3>Message d'erreur : La division par zero n'est pas possible !</h3>
+{% endif %}
+
+
+{% endblock %}
