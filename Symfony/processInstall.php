@@ -90,3 +90,6 @@ phpinfo();
 
 // Pour valider une migration
 // symfony console doctrine:migrations:migrate
+
+// Pour créer un form automatique de symfony
+// symfony console make:form
