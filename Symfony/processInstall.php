@@ -105,3 +105,6 @@ phpinfo();
 
 // Création du formulaire d'inscription 
 // symfony console make:registration-form
+
+// Création d'un crud entier
+// symfony console make:crud

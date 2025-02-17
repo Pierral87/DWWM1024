@@ -10,10 +10,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+
+// La ligne ci dessous me permet de limiter l'accès AU CONTROLLER ENTIER ET TOUTES SES ROUTES, au ROLE_ADMIN
+// #[IsGranted("ROLE_ADMIN")]
+
+#[Route('/admin')]
 
 final class LivreController extends AbstractController
 {
     #[Route('/livre', name: 'app_livre')]
+    // La ligne ci dessous me permet de limiter l'accès à CETTE ROUTE UNIQUEMENT au ROLE_ADMIN
+    // #[IsGranted("ROLE_ADMIN")]
     // Ici je rajoute la classe Repository de Livre qui me permet de lancer les requêtes de selection
     // En gros lorsque j'ai un SELECT à lancer sur une table, je le fais toujours au travers de son repository
     // (Rappel : Il se crée automatiquement en même temps que l'entité elle même)

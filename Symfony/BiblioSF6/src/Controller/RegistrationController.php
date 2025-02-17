@@ -29,6 +29,11 @@ class RegistrationController extends AbstractController
             // encode the plain password
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
+            // ATTENTION j'exécute la ligne ci dessous seulement UNE FOIS!!! Pour créer le seul compte "admin" de ma bibliothèque
+            // Après avoir créé le compte admin, je mets en commentaire cette ligne
+            // $user->setRoles(["ROLE_ADMIN"]);
+            // $user->setRoles(["ROLE_BIBLIO"]);
+
             $entityManager->persist($user);
             $entityManager->flush();
 

@@ -7,7 +7,7 @@
 
 	<div class="row">
 		{% for livre in livres %}
-
+			{# On peut transmettre dans un include, un paramètre, ici on transmet la variable livre qui est utilisée par notre vignette #}
 			<div class="col-4 mt-1">
 				{{include("/livre/_vignette.html.twig", {livre})}}
 			</div>

@@ -39,8 +39,15 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+    # Ici je défini des droits d'accès en rapport avec un "pattern" de route, toutes les routes contenant /admin  seront limitées au ROLE_ADMIN
+    # Je peux ici citer plusieurs roles differents pour un meme pattern, je dois par contre les transmettre sous forme d'array (entre crochets)
+    # - { path: ^/admin, roles: [ROLE_BIBLIO,ROLE_ADMIN]
+        - { path: ^/admin, roles: ROLE_BIBLIO }
+        - { path: ^/profile, roles: ROLE_USER }
+
+    # On peut aussi créer une hierarchie de role, pour indiquer qu'un role possède aussi les mêmes droits que un ou plusieurs autres rôles
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_BIBLIO, ROLE_LECTEUR
 
 when@test:
     security:
