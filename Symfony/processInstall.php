@@ -93,3 +93,15 @@ phpinfo();
 
 // Pour créer un form automatique de symfony
 // symfony console make:form
+
+// Pour créer une page Home 
+// symfony console make:controller Home
+
+// Pour créer un "user" c'est la classe qui définira notre système d'inscription/connexion
+// symfony console make:user
+
+// Création du système d'authentification rattaché au user (Abonne)
+// symfony console make:auth
+
+// Création du formulaire d'inscription 
+// symfony console make:registration-form

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue
+{% endblock %}
+
+{% block body %}
+
+	<div class="row">
+		{% for livre in livres %}
+
+			<div class="col-4 mt-1">
+				{{include("/livre/_vignette.html.twig", {livre})}}
+			</div>
+
+		{% endfor %}
+	</div>
+
+{% endblock %}

@@ -100,6 +100,7 @@ final class LivreController extends AbstractController
         if ($formLivre->isSubmitted() && $formLivre->isvalid()) {
             $em->persist($livre);
             $em->flush();
+            $this->addFlash("success", "Le livre a bien été ajouté");
             return $this->redirectToRoute("app_livre");
         }
         // dump($livre);
@@ -123,7 +124,6 @@ final class LivreController extends AbstractController
     #[Route('/livre/modifier/{id}', name: 'app_modifier')]
     public function modifier(EntityManagerInterface $em, Request $request, LivreRepository $livreRepo, $id)
     // public function modifier(EntityManagerInterface $em, Request $request, Livre $livre)
-
     {
         // Ici je me sers de l'id récupéré en param de la route pour lancer une requête sur le repository
         // Cette requête me permet de récupérer le livre concerné par cet id
@@ -141,6 +141,7 @@ final class LivreController extends AbstractController
             // Le reste du fonctionnement ne diffère pas du tout de la route nouveau, on peut par contre se passer du persist car l'entité existe déjà dans la table, il suffit de faire un flush 
             // $em->persist($livre);
             $em->flush();
+            $this->addFlash("success", "Le livre a bien été modifié");
             return $this->redirectToRoute("app_livre");
         }
 
@@ -156,7 +157,6 @@ final class LivreController extends AbstractController
         // Il va voir le paramètre s'appellant id dans la route, il va aussi comprendre que j'injecte dans les param de la méthode une entité Livre, il va faire le rapprochement entre les deux et récupérer directement le Livre possédant cet id ! 
         // Cette fonctionnalité m'évite de faire la requête sur le repository pour récupérer les informations du livre qui possède cet id !
         // Grâce à ça, j'économise quelques lignes de code :) 
-
 
         if($request->isMethod("POST")) {
             $em->remove($livre);
