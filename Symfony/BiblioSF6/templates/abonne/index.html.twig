@@ -1,43 +1,70 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Abonne index{% endblock %}
+{% block title %}Abonne index
+{% endblock %}
 
 {% block body %}
-    <h1>Abonne index</h1>
+	<h1>Abonne index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Pseudo</th>
-                <th>Roles</th>
-                <th>Password</th>
-                <th>Prenom</th>
-                <th>Nom</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for abonne in abonnes %}
-            <tr>
-                <td>{{ abonne.id }}</td>
-                <td>{{ abonne.pseudo }}</td>
-                <td>{{ abonne.roles ? abonne.roles|json_encode : '' }}</td>
-                <td>{{ abonne.password }}</td>
-                <td>{{ abonne.prenom }}</td>
-                <td>{{ abonne.nom }}</td>
-                <td>
-                    <a href="{{ path('app_abonne_show', {'id': abonne.id}) }}">show</a>
-                    <a href="{{ path('app_abonne_edit', {'id': abonne.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Pseudo</th>
+				<th>Roles</th>
+				<th>Prenom</th>
+				<th>Nom</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for abonne in abonnes %}
+				<tr>
+					<td>{{ abonne.id }}</td>
+					<td>{{ abonne.pseudo }}</td>
+					<td>
+						{# {{ abonne.roles ? abonne.roles|json_encode : '' }} #}
+						{# Ici je peux faire une boucle sur abonne.roles pour gérer un affichage différent du array, on va préférer afficher des mots comme "Directeur" "Bibliothécaire" pour nos roles #}
 
-    <a href="{{ path('app_abonne_new') }}">Create new</a>
+						{# Ici je défini une variable break, que j'initialise à false
+												                        Cette variable me sert de repère pour comprendre si je dois "break" la boucle ou pas
+												                        en PHP natif, lorsque je fais break dans une boucle, je stoppe immédiatement cette boucle, cette instruction n'existe pas en twig... Donc je la simule via cette variable break #}
+						{# {% set break = false %} #}
+							{% for role in abonne.roles %}
+							{# Si break est toujours sur false je rentre dans la condition d'affichage des roles Si break est sur true je ne rentre pas dans la condition d'affichage des roles et je n'affiche ainsi qu'un seul role #}
+							{# {% if break == false %} #}
+
+								{# Ou sinon en mieux, une condition qui permet de faire un traitement uniquement pour le premier tour de boucle#}
+									{% if loop.first %}
+
+									{% if role == "ROLE_ADMIN" %}
+									Directeur{# Si je rentre ici dans une des conditions du if pour les roles, je passe la variable break sur true, je ne passerai donc plus sur cette vérification de role (pour permettre d'en afficher qu'un seul) #}
+									{# {% set break = true %} #}
+								{% elseif role == "ROLE_BIBLIO"%}
+									Bibliothécaire
+									{# {% set break = true %} #}
+								{% elseif role == "ROLE_LECTEUR"%}
+									Lecteur
+									{# {% set break = true %} #}
+								{% endif %}
+
+							{% endif %}
+						{% endfor %}
+					</td>
+					<td>{{ abonne.prenom }}</td>
+					<td>{{ abonne.nom }}</td>
+					<td>
+						<a href="{{ path('app_abonne_show', {'id': abonne.id}) }}">show</a>
+						<a href="{{ path('app_abonne_edit', {'id': abonne.id}) }}">edit</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="7">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_abonne_new') }}">Create new</a>
 {% endblock %}
