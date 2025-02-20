@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Categorie;
 use App\Entity\Livre;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -41,6 +43,12 @@ class LivreType extends AbstractType
                     "label" => "Nom de l'auteur"
                 ]
             )
+            ->add("categorie", EntityType::class, [
+                "class" => Categorie::class,
+                "choice_label" => "titre", // ici titre, on comprend le titre de la categorie, ce sera le titre de la categorie qui sera affiché pour choisir la catégorie en question
+                "required" => false,
+                "label" => "Catégorie"
+            ])
             ->add(
                 "enregistrer",
                 SubmitType::class,

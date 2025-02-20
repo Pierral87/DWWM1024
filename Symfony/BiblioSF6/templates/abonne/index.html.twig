@@ -54,8 +54,8 @@
 					<td>{{ abonne.prenom }}</td>
 					<td>{{ abonne.nom }}</td>
 					<td>
-						<a href="{{ path('app_abonne_show', {'id': abonne.id}) }}">show</a>
-						<a href="{{ path('app_abonne_edit', {'id': abonne.id}) }}">edit</a>
+						<a class="btn btn-info" href="{{ path('app_abonne_show', {'id': abonne.id}) }}">Voir</a>
+						<a class="btn btn-warning" href="{{ path('app_abonne_edit', {'id': abonne.id}) }}">Modifier</a>
 					</td>
 				</tr>
 			{% else %}
@@ -66,5 +66,5 @@
 		</tbody>
 	</table>
 
-	<a href="{{ path('app_abonne_new') }}">Create new</a>
+	<a class="btn btn-primary" href="{{ path('app_abonne_new') }}">Nouvel abonné</a>
 {% endblock %}

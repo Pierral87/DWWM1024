@@ -21,6 +21,7 @@
 			<th>Id</th>
 			<th>Titre</th>
 			<th>Auteur</th>
+			<th>Catégorie</th>
 			<th>Actions</th>
 		</thead>
 		<tbody>
@@ -33,6 +34,11 @@
 					<td>{{livre.id}}</td>
 					<td>{{livre.titre}}</td>
 					<td>{{livre.auteur}}</td>
+					{# <pre>
+						{{ dump(livre.categorie) }}
+					</pre> #}
+					
+					<td>{{livre.categorie ? livre.categorie.titre : ""}}</td>
 					<td>
 						<a href="{{path("app_modifier", {id:livre.id})}}" class="btn btn-warning">
 							<i class="fa-regular fa-pen-to-square"></i>
@@ -90,7 +96,7 @@
 			{% endfor %}
 		</tbody>
 		<tfoot>
-			<th colspan="3">Nombre de livres :
+			<th colspan="4">Nombre de livres :
 			</th>
 			{# Ici j'utilise un filtre twig pour récupérer la longueur de $livres donc le nombre de livre présents dans ma bibliothèque #}
 			{# liste des filtres twig https://twig.symfony.com/doc/3.x/filters/index.html #}
@@ -99,4 +105,6 @@
 			</td>
 		</tfoot>
 	</table>
+
+		<a class="btn btn-primary" href="{{ path('app_nouveau') }}">Nouveau livre</a>
 {% endblock %}
