@@ -11,6 +11,7 @@
                 <th>Id</th>
                 <th>Titre</th>
                 <th>Mots</th>
+                <th>Nombre de livres</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -20,6 +21,7 @@
                 <td>{{ categorie.id }}</td>
                 <td>{{ categorie.titre }}</td>
                 <td>{{ categorie.mots }}</td>
+                <td>{{ categorie.livres|length }}</td>
                 <td>
                     <a class="btn btn-success" href="{{ path('app_categorie_show', {'id': categorie.id}) }}">show</a>
                     <a class="btn btn-warning" href="{{ path('app_categorie_edit', {'id': categorie.id}) }}">edit</a>

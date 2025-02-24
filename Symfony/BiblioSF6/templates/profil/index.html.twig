@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil
+{% endblock %}
+
+{% block titreH1 %}Mon Profil
+{% endblock %}
+
+{% block body %}
+
+	{# Ici je dis bonjour avec le pseudo de l'utilisateur #}
+	<h2>Bonjour,
+		{{app.user.pseudo}}
+	</h2>
+
+	<ul class="list-group">
+		<li class="list-group-item">{{app.user.nom}}</li>
+		<li class="list-group-item">{{app.user.prenom}}</li>
+	</ul>
+
+	<h3>Mes emprunts</h3>
+	<table class="table table-striped">
+		<thead>
+			<th>Livre</th>
+			<th>Catégorie</th>
+			<th>Emprunté le</th>
+			<th>Rendu le</th>
+		</thead>
+		<tbody>
+        {# Dans l'abonné ici représenté par app.user, j'ai accès à ses emprunts grâce à la jointure, je peux donc récupérer les emprunts et les afficher #}
+
+        {# 
+        Ici on récupère à partir du user connecté donc app.user, ses emprunts, les livres concernés par ces emprunts, ainsi que les catégories des livres en question.
+        En bref, en une seule instruction on récupère les données de nos 4 tables différentes ! 
+        Si on voulait lancer à la main une requête récupérant toutes ces informations là... Attention la jointure ! 
+        Voilà la requête qu'il aurait fallu lancer 
+        SELECT abonne.pseudo, abonne.nom, abonne.prenom, livre.titre, livre.auteur, categorie.titre, emprunt.date_emprunt, emprunt.date_retour 
+        FROM abonne
+        JOIN emprunt ON abonne.id = emprunt.abonne_id
+        JOIN livre ON livre.id = emprunt.livre_id
+        JOIN categorie ON categorie.id = livre.categorie_id
+        WHERE abonne.id = app.user.id
+         #}
+        {% for emprunt in app.user.emprunts %}
+            <tr>
+            <td> {{emprunt.livre.titre}} {{emprunt.livre.auteur}}</td>
+            <td> {{emprunt.livre.categorie.titre}}</td>
+            <td> {{emprunt.dateEmprunt|date("d/m/Y")}} </td>
+            <td>{{emprunt.dateRetour ? emprunt.dateRetour|date("d/m/Y") : "Emprunt en cours"}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+	</table>
+
+{% endblock %}

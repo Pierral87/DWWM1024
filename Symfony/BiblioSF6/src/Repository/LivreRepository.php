@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Emprunt;
 use App\Entity\Livre;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -40,4 +41,17 @@ class LivreRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    // On crée une requête qui me donnera les livres non disponibles (ceux qui ont une date rendu NULL dans la table emprunt)
+
+    public function livresNonDisponibles() 
+    {
+        return $this->createQueryBuilder('l')
+            ->join(Emprunt::class, "e", "WITH", "l.id = e.livre") // on parle ici de l'objet représenté dans la bdd, le livre, on ne réfléchis pas en sql pur 
+            ->where("e.date_retour IS NULL")
+            ->orderBy("l.auteur")
+            ->addOrderBy("l.titre")
+            ->getQuery()
+            ->getResult();
+    }
 }

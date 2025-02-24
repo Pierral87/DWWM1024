@@ -43,11 +43,12 @@ security:
     # Je peux ici citer plusieurs roles differents pour un meme pattern, je dois par contre les transmettre sous forme d'array (entre crochets)
     # - { path: ^/admin, roles: [ROLE_BIBLIO,ROLE_ADMIN]
         - { path: ^/admin, roles: ROLE_BIBLIO }
-        - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/profile, roles: ROLE_LECTEUR }
 
     # On peut aussi créer une hierarchie de role, pour indiquer qu'un role possède aussi les mêmes droits que un ou plusieurs autres rôles
     role_hierarchy:
-        ROLE_ADMIN: ROLE_BIBLIO, ROLE_LECTEUR
+        ROLE_ADMIN: ROLE_BIBLIO
+        ROLE_BIBLIO: ROLE_LECTEUR
 
 when@test:
     security:

@@ -1,40 +1,55 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Categorie{% endblock %}
+{% block title %}Categorie
+{% endblock %}
 
 {% block body %}
-    <h1>Categorie</h1>
+	<h1>Categorie {{categorie.titre}} </h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ categorie.id }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ categorie.titre }}</td>
-            </tr>
-            <tr>
-                <th>Mots</th>
-                <td>{{ categorie.mots }}</td>
-            </tr>
-        </tbody>
-    </table>
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ categorie.id }}</td>
+			</tr>
+			<tr>
+				<th>Titre</th>
+				<td>{{ categorie.titre }}</td>
+			</tr>
+			<tr>
+				<th>Mots</th>
+				<td>{{ categorie.mots }}</td>
+			</tr>
+		</tbody>
+	</table>
 
-    {# <pre>
-        {{ dump(categorie.livres) }}
-    </pre> #}
+	{# <pre>
+	        {{ dump(categorie.livres) }}
+	    </pre> #}
+	<table class="table table-striped table-bordered">
+		<thead>
+			<th>Id</th>
+			<th>Titre</th>
+			<th>Auteur</th>
+		</thead>
+		<tbody>
+			{% for livre in categorie.livres %}
+				<tr>
+					<td>{{livre.id}}</td>
+					<td>{{livre.titre}}</td>
+					<td>{{livre.auteur}}</td>
+				</tr>
+            {% else %}
+                <tr>
+                <td colspan=3> Aucun livre pour cette catégorie </td>
+                </tr>
+			{% endfor %}
+		</tbody>
+	</table>
 
-    {% for livre in categorie.livres %}
-        <pre>
-            {{ dump(livre) }}
-        </pre>
-    {% endfor %}
+	<a class="btn btn-secondary" href="{{ path('app_categorie_index') }}">back to list</a>
 
-    <a class="btn btn-secondary" href="{{ path('app_categorie_index') }}">back to list</a>
+	<a class="btn btn-warning" href="{{ path('app_categorie_edit', {'id': categorie.id}) }}">edit</a>
 
-    <a class="btn btn-warning" href="{{ path('app_categorie_edit', {'id': categorie.id}) }}">edit</a>
-
-    {{ include('categorie/_delete_form.html.twig') }}
+	{{ include('categorie/_delete_form.html.twig') }}
 {% endblock %}

@@ -18,10 +18,12 @@ final class HomeController extends AbstractController
             // 2 - Affichez la liste des livres sous forme de vignette en appelant le fichier _vignette.html.twig
 
          $livres = $livreRepo->findAll();   
+         $livres_non_dispo = $livreRepo->livresNonDisponibles();
 
 
         return $this->render('home/index.html.twig', [
             'livres' => $livres,
+            'livres_non_dispo' => $livres_non_dispo
         ]);
     }
 }

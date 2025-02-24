@@ -33,6 +33,7 @@ class RegistrationController extends AbstractController
             // Après avoir créé le compte admin, je mets en commentaire cette ligne
             // $user->setRoles(["ROLE_ADMIN"]);
             // $user->setRoles(["ROLE_BIBLIO"]);
+            $user->setRoles(["ROLE_LECTEUR"]);
 
             $entityManager->persist($user);
             $entityManager->flush();

@@ -3,6 +3,8 @@
   <div class="card-body">
     <h5 class="card-title"> {{livre.titre}} </h5>
     <p class="card-text">{{livre.auteur}}</p>
-    <a href="#" class="btn btn-primary">Emprunter</a>
+    <a href="{{path("app_profil_emprunter", {id: livre.id})}}" 
+    class="btn btn-primary {{livre in livres_non_dispo ? "disabled" : ""}}">{{livre in livres_non_dispo ? "Livre non dispo" : "Emprunter"}}
+    </a>
   </div>
 </div>
